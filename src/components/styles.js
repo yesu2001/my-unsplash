@@ -80,7 +80,6 @@ export const CancelBtn = {
 };
 
 export const SubmitBtn = {
-  cursor: "pointer",
   padding: "10px 15px",
   border: "none",
   borderRadius: 5,
@@ -88,6 +87,9 @@ export const SubmitBtn = {
   background: green[700],
   color: "white",
   fontWeight: "bold",
+  ":disabled": {
+    background: "grey",
+  },
 };
 
 export const container = {
