@@ -107,12 +107,13 @@ export const container = {
 
 export const DeleteBtn = styled("button")(() => ({
   margin: "10px",
-  border: "1px solid red",
+  border: "1px solid ",
+  borderColor: red[200],
   background: "transparent",
   outline: "none",
   padding: "5px",
   borderRadius: 10,
-  color: red[700],
+  color: red[200],
   fontWeight: "bold",
   cursor: "pointer",
 }));

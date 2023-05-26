@@ -3,11 +3,11 @@ import React from "react";
 import Header from "./Header";
 import Gallery from "./Gallery";
 
-function Layout() {
+function Layout({ images, handleDelete, message, setMessage }) {
   return (
     <Stack>
-      <Header />
-      <Gallery />
+      <Header message={message} setMessage={setMessage} />
+      <Gallery images={images} handleDelete={handleDelete} message={message} />
     </Stack>
   );
 }

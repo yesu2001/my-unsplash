@@ -21,10 +21,10 @@ import {
   Search,
   SearchInput,
 } from "./styles";
+import { postImage, getImages } from "../api";
 
-function Header() {
+function Header({ message, setMessage }) {
   const [open, setOpen] = React.useState(false);
-  const uniqueId = Math.random().toString(16).slice(-4);
   const [loading, setLoading] = React.useState(true);
   const [uploadData, setUploadData] = React.useState({
     label: "",
@@ -65,15 +65,18 @@ function Header() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!uploadData.label === "" || !uploadData.imageUrl === "") {
       alert("please fill all the fields");
     } else {
-      console.log(uploadData);
+      const response = await postImage(uploadData);
       handleClose();
       uploadData.label = "";
       uploadData.imageUrl = "";
+      console.log(response.message);
+      setMessage(response.message);
+      setInterval(setMessage(""), 3000);
     }
   };
 
