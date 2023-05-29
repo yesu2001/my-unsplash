@@ -41,7 +41,7 @@ function Header({ setMessage, labels }) {
       const formData = new FormData();
       formData.append("file", imageFile);
       formData.append("upload_preset", "unsplash_image_db");
-      await fetch(process.env.CLOUD_URL, {
+      await fetch("https://api.cloudinary.com/v1_1/dsssldou9/image/upload", {
         method: "POST",
         body: formData,
       })
@@ -58,6 +58,7 @@ function Header({ setMessage, labels }) {
         .catch((error) => {
           console.error(error);
           setMessage(error.message);
+          setInterval(setMessage(""), 3000);
         });
     } else {
       setUploadData((previousData) => ({

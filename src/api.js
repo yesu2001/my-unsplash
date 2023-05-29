@@ -1,6 +1,7 @@
+const url = "https://my-unsplash-api-chi.vercel.app/unsplash";
 export const postImage = async (uploaddata) => {
   try {
-    const response = await fetch("http://localhost:8000/", {
+    const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(uploaddata),
@@ -14,7 +15,7 @@ export const postImage = async (uploaddata) => {
 
 export const getImages = async () => {
   try {
-    const response = await fetch("http://localhost:8000/");
+    const response = await fetch(url);
     const data = await response.json();
     return data;
   } catch (e) {
@@ -24,7 +25,7 @@ export const getImages = async () => {
 
 export const deleteImage = async (id) => {
   try {
-    const response = await fetch(`http://localhost:8000/${id}`, {
+    const response = await fetch(`${url}/${id}`, {
       method: "DELETE",
     });
     const data = await response.json();
