@@ -3,11 +3,23 @@ import React from "react";
 import Header from "./Header";
 import Gallery from "./Gallery";
 
-function Layout({ images, handleDelete, message, setMessage }) {
+function Layout({
+  images,
+  handleDelete,
+  message,
+  setMessage,
+  loading,
+  labels,
+}) {
   return (
     <Stack>
-      <Header message={message} setMessage={setMessage} />
-      <Gallery images={images} handleDelete={handleDelete} message={message} />
+      <Header message={message} setMessage={setMessage} labels={labels} />
+      <Gallery
+        images={images}
+        handleDelete={handleDelete}
+        message={message}
+        loading={loading}
+      />
     </Stack>
   );
 }

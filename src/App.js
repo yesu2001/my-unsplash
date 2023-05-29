@@ -7,16 +7,21 @@ import MessageBox from "./components/MessageBox";
 function App() {
   const [images, setImages] = React.useState([]);
   const [message, setMessage] = React.useState("");
-
+  const [loading, setLoading] = React.useState(false);
+  const [labels, setLabels] = React.useState([]);
   React.useEffect(() => {
-    async function fetchData() {
-      const db_data = await getImages();
-      if (db_data) {
-        setImages(db_data);
-      }
-    }
     fetchData();
   }, []);
+
+  async function fetchData() {
+    setLoading(true);
+    const db_data = await getImages();
+    if (db_data) {
+      setInterval(setImages(db_data), 3000);
+      setLoading(false);
+      setLabels(db_data.map((item) => item.label));
+    }
+  }
 
   const handleDelete = async (id) => {
     setImages(images.filter((item) => item._id !== id));
@@ -39,6 +44,8 @@ function App() {
         handleDelete={handleDelete}
         message={message}
         setMessage={setMessage}
+        loading={loading}
+        labels={labels}
       />
     </Container>
   );

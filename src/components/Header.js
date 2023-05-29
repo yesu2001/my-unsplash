@@ -22,8 +22,9 @@ import {
   SearchInput,
 } from "./styles";
 import { postImage, getImages } from "../api";
+import "./styles.css";
 
-function Header({ message, setMessage }) {
+function Header({ setMessage, labels }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [uploadData, setUploadData] = React.useState({
@@ -40,7 +41,7 @@ function Header({ message, setMessage }) {
       const formData = new FormData();
       formData.append("file", imageFile);
       formData.append("upload_preset", "unsplash_image_db");
-      await fetch("https://api.cloudinary.com/v1_1/dsssldou9/image/upload", {
+      await fetch(process.env.CLOUD_URL, {
         method: "POST",
         body: formData,
       })
@@ -56,6 +57,7 @@ function Header({ message, setMessage }) {
         })
         .catch((error) => {
           console.error(error);
+          setMessage(error.message);
         });
     } else {
       setUploadData((previousData) => ({
@@ -74,7 +76,6 @@ function Header({ message, setMessage }) {
       handleClose();
       uploadData.label = "";
       uploadData.imageUrl = "";
-      console.log(response.message);
       setMessage(response.message);
       setInterval(setMessage(""), 3000);
     }
@@ -90,10 +91,6 @@ function Header({ message, setMessage }) {
     >
       <Stack direction={"row"} alignItems="center" spacing={4}>
         <img src={logo} alt="logo" />
-        <Search>
-          <SearchIcon sx={{ color: "grey", mr: 1 }} />
-          <SearchInput type="text" placeholder="search by name" />
-        </Search>
       </Stack>
       <AddPhotoBtn onClick={handleOpen}>Add photo</AddPhotoBtn>
       <Modal
